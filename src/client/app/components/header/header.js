@@ -10,8 +10,16 @@ class Header extends React.Component {
             <h3 className="masthead-brand">react-redux</h3>
             <nav>
                 <ul className="nav masthead-nav">
-                <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-                <li><Link to="/courses" activeClassName="active">Courses</Link></li>
+                    <li>
+                        <IndexLink to="/" activeClassName="active">
+                            Home
+                        </IndexLink>
+                    </li>
+                    <li>
+                        <Link to="/courses" activeClassName="active">
+                            Courses
+                        </Link>
+                    </li>
                 </ul>
             </nav>
             </div>
