@@ -1,3 +1,5 @@
+import * as actionTypes from './action-types';
+
 /**
  * Instanciates a create course action.
  * @param {course} course object.
@@ -6,17 +8,10 @@
 const courseActions = {
     'createCourse': function createCourse (course) {
         return {
-            'type': 'CREATE_COURSE',
-            course
-        };
-    },
-    'deleteCourse': function deleteCourse (course) {
-        return {
-            'type': 'CREATE_COURSE',
+            'type': actionTypes.CREATE_COURSE,
             course
         };
     }
 };
-
 
 export default courseActions;

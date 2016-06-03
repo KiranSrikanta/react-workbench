@@ -21,7 +21,7 @@ $.fn.simulate = function (eventName, value) {
     if(value){
         this.val(value);
     }
-    TestUtils.simulate[eventName](this[0]);
+    TestUtils.Simulate[eventName](this[0]);
 }
 
 chaiJQuery(chai, chai.util, $);
