@@ -1,3 +1,3 @@
-var context = require.context('./src/client/tests', true, /.+\.spec\.js?$/);
+var context = require.context('./src/client/app', true, /.+\.spec\.js?$/);
 context.keys().forEach(context);
 module.exports = context;

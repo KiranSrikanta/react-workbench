@@ -1,5 +1,6 @@
-import { renderComponent, expect } from './test-helper';
-import CourseReducer from '../app/reducers/course-reducer';
+/*eslint-disable */
+import { renderComponent, expect } from '../test-helper';
+import CourseReducer from './course-reducer';
 
 describe('CourseReducer', function () {
     it('handles unknown action', function () {

@@ -1,3 +1,5 @@
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../../../node_modules/bootstrap/dist/css/bootstrap-theme.css';
 import {Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import React from 'react';

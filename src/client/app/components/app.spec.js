@@ -1,5 +1,6 @@
-import { renderComponent, expect } from './test-helper';
-import App from '../app/components/app';
+/*eslint-disable */
+import { renderComponent, expect } from '../test-helper';
+import App from './app';
 import React from 'react';
 
 describe('App', function () {

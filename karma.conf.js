@@ -35,7 +35,13 @@ module.exports = function (config) {
             include : [TEST_DIR, APP_DIR],
             loader: 'babel',
             test: /\.js?$/
-          }
+          },
+          { test: /\.css$/, loader: "style-loader!css-loader" },
+          { test: /\.eot$/, loader: "file" },
+          { test: /\.woff$/, loader: "file" },
+          { test: /\.woff2$/, loader: "file" },
+          { test: /\.ttf$/, loader: "file" },
+          { test: /\.svg$/, loader: 'svg-inline' }
         ],
       }
     },

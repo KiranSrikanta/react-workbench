@@ -13,11 +13,13 @@ module.exports =  {
   },
   module : {
     loaders : [
-      {
-        test : /\.js?/,
-        include : APP_DIR,
-        loader : 'babel'
-      }
+      { test : /\.js?/, include : APP_DIR, loader : 'babel' },
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.eot$/, loader: "file" },
+      { test: /\.woff$/, loader: "file" },
+      { test: /\.woff2$/, loader: "file" },
+      { test: /\.ttf$/, loader: "file" },
+      { test: /\.svg$/, loader: 'svg-inline' }
     ]
   }
 };
