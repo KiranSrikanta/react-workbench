@@ -4,9 +4,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import chai, { expect } from 'chai';
 import chaiJQuery from 'chai-jquery';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducers from '../app/reducers';
 
-function renderComponent(Component) {
-    const componentInstance = TestUtils.renderIntoDocument(<Component />);
+function renderComponent(Component, props={}, state={}) {
+    const componentInstance = TestUtils.renderIntoDocument(
+        <Provider store={createStore(reducers, state)}>
+            <Component {...props} />
+        </Provider>
+    );
     return $(ReactDOM.findDOMNode(componentInstance));
 }
 

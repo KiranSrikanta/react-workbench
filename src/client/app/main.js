@@ -1,11 +1,15 @@
-import Comp1 from './comp1';
+import {Router, browserHistory} from 'react-router';
+import {Provider} from 'react-redux';
 import React from 'react';
+import configureStore from './store/configure-store';
 import {render} from 'react-dom';
+import routes from './routes';
 
-class App extends React.Component {
-  render () {
-    return <p>Hello World!<Comp1 /></p>;
-  }
-}
+const store = configureStore();
 
-render(<App/>, document.getElementById('app'));
+render(
+  <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>,
+  document.getElementById('app')
+);
