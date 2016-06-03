@@ -5,7 +5,7 @@ var BUILD_DIR = path.resolve(__dirname, 'src/client/public/assets/js');
 var APP_DIR = path.resolve(__dirname, 'src/client/app');
 
 module.exports =  {
-  entry: APP_DIR + '/index.js',
+  entry: APP_DIR + '/main.js',
   output: {
     publicPath: '/assets/js/',
     path: BUILD_DIR,

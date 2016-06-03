@@ -1,5 +1,4 @@
 import React from 'react';
-import {render} from 'react-dom';
 
 class Comp1 extends React.Component {
   render () {
@@ -7,4 +6,4 @@ class Comp1 extends React.Component {
   }
 }
 
-module.exports = Comp1;
+export default Comp1;

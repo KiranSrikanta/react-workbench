@@ -1,6 +1,6 @@
+import Comp1 from './comp1';
 import React from 'react';
 import {render} from 'react-dom';
-import Comp1 from './comp1';
 
 class App extends React.Component {
   render () {
