@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 //import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import {rootReducer} from '../reducers';
+import {rootReducer} from '../reducers/index';
 
 /**
  * Creates the redux store.
@@ -8,9 +8,11 @@ import {rootReducer} from '../reducers';
  * @returns {store} The redux store.
  */
 export default function configureStore (initialState) {
-    return createStore(
+    const store = createStore(
         rootReducer,
         initialState,
         window.devToolsExtension()
     );
+    
+    return store;
 }

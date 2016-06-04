@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import * as actionTypes from '../actions/action-types';
+import * as actionTypes from '../courses/actions/action-types';
 
 /**
  * Redux reducer for courses.

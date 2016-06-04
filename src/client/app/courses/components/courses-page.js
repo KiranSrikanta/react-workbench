@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import courseActions from '../../actions/course-actions';
+import courseActions from '../actions/course-actions';
 
 class CoursesPage extends React.Component {
     constructor (props, context) {

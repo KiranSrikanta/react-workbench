@@ -1,7 +1,7 @@
 import {IndexRoute, Route} from 'react-router';
-import App from './components/app';
-import CoursesPage from './components/courses/courses-page';
-import HomePage from './components/home/home-page';
+import App from './common/components/app';
+import CoursesPage from './courses/components/courses-page';
+import HomePage from './home/components/home-page';
 import React from 'react';
 
 export default (

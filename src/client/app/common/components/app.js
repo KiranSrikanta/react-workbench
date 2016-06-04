@@ -1,7 +1,7 @@
-import './app.css';
+import './assets/css/app.css';
 import React, {PropTypes} from 'react';
-import Footer from './footer/footer';
-import Header from './header/header';
+import Footer from './footer';
+import Header from './header';
 
 class App extends React.Component {
   render () {
