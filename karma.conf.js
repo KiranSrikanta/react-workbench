@@ -1,7 +1,8 @@
 var path = require('path');
+var webpack = require('webpack');
+var WebpackTestConfig = require('./webpack.config.test.js');
 
-var TEST_DIR = path.resolve(__dirname, 'src/client/tests');
-var APP_DIR = path.resolve(__dirname, 'src/client/app');
+process.env.NODE_ENV = 'test';
 
 module.exports = function (config) {
   config.set({
@@ -10,7 +11,7 @@ module.exports = function (config) {
     files: [
       'tests.bundle.js'
     ],
-    frameworks: [ 'chai', 'mocha' ],
+    frameworks: [ 'chai', 'sinon-stub-promise', 'sinon-chai', 'mocha' ],
     plugins: [
       'karma-chrome-launcher',
       'karma-ie-launcher',
@@ -18,7 +19,8 @@ module.exports = function (config) {
       'karma-mocha',
       'karma-sourcemap-loader',
       'karma-webpack',
-      'karma-mocha-reporter'
+      'karma-mocha-reporter',
+      'karma-sinon-stub-promise'
     ],
     // run the bundle through the webpack and sourcemap plugins
     preprocessors: {
@@ -27,20 +29,7 @@ module.exports = function (config) {
     reporters: [ 'mocha' ],
     singleRun: true,
     // webpack config object
-    webpack: {
-      devtool: 'inline-source-map',
-      module: {
-        loaders: [
-          { test: /\.js?$/, include : [TEST_DIR, APP_DIR], loader: 'babel'},
-          { test: /\.css$/, loader: "style-loader!css-loader" },
-          { test: /\.eot$/, loader: "file" },
-          { test: /\.woff$/, loader: "file" },
-          { test: /\.woff2$/, loader: "file" },
-          { test: /\.ttf$/, loader: "file" },
-          { test: /\.svg$/, loader: 'svg-inline' }
-        ],
-      }
-    },
+    webpack: WebpackTestConfig,
     webpackMiddleware: {
       noInfo: true,
     }

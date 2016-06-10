@@ -1,100 +1,131 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var webpack = require('webpack');
 var path = require('path');
-var webpackMiddleware = require("webpack-dev-middleware");
-var webpackHotMiddleware = require("webpack-hot-middleware")
 
 var app = express();
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-
-var BUILD_DIR = path.resolve(__dirname, '../client/public/assets');
-var APP_DIR = path.resolve(__dirname, '../client/app');
 var DEST_DIR = path.resolve(__dirname, '../client/public');
 
-var webpackConfig = {
-    // webpack options
-    // webpackMiddleware takes a Compiler object as first parameter
-    // which is returned by webpack(...) without callback.
-    entry: ['webpack-hot-middleware/client', APP_DIR + '/main.js'],
-    output: {
-        publicPath: '/assets/',
-        path: BUILD_DIR,
-        filename: 'bundle.min.js'
-        // no real path is required, just pass "/"
-        // but it will work with other paths too.
-    },
-    devtool: 'inline-source-map',
-    module: {
-        loaders: [
-            { test: /\.js?$/, include : APP_DIR, loader: 'babel'},
-            { test: /\.css$/, loader: "style-loader!css-loader" },
-            { test: /\.eot$/, loader: "file" },
-            { test: /\.woff$/, loader: "file" },
-            { test: /\.woff2$/, loader: "file" },
-            { test: /\.ttf$/, loader: "file" },
-            { test: /\.svg$/, loader: 'svg-inline' }
-        ],
-    },
-    plugins: [
-        // Webpack 1.0 
-        //new webpack.optimize.OccurenceOrderPlugin(),
-        // Webpack 2.0 fixed this mispelling 
-        //new webpack.optimize.OccurrenceOrderPlugin(), 
-        new webpack.HotModuleReplacementPlugin(),
-        //new webpack.NoErrorsPlugin()
-    ]
-};
+if (process.env.NODE_ENV != 'production') {
+  console.log('production');
+  console.log(process.env.NODE_ENV);
+  var webpack = require('webpack');
+  var webpackMiddleware = require("webpack-dev-middleware");
+  var webpackHotMiddleware = require("webpack-hot-middleware");
+  var webpackConfig = require('../../webpack.config.dev');
+  var compiler = webpack(webpackConfig);
 
-var compiler = webpack(webpackConfig);
+  app.use(webpackMiddleware(compiler, 
+      {
+          noInfo: true, 
+          publicPath: webpackConfig.output.publicPath
+      }));
 
-app.use(webpackMiddleware(compiler, 
-    {
-        noInfo: true, 
-        publicPath: webpackConfig.output.publicPath
-    }));
-
-app.use(webpackHotMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 app.use(express.static(DEST_DIR));
 
 var courses = [
-    {
-        id: 1,
-        title: 'test',
-        description: 'test description',
-        author: 'someone'
-    }
+  {
+    id: "react-flux-building-applications",
+    title: "Building Applications in React and Flux",
+    watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
+    authorId: "cory-house",
+    length: "5:08",
+    category: "JavaScript"
+  },
+  {
+    id: "clean-code",
+    title: "Clean Code: Writing Code for Humans",
+    watchHref: "http://www.pluralsight.com/courses/writing-clean-code-humans",
+    authorId: "cory-house",
+    length: "3:10",
+    category: "Software Practices"
+  },
+  {
+    id: "architecture",
+    title: "Architecting Applications for the Real World",
+    watchHref: "http://www.pluralsight.com/courses/architecting-applications-dotnet",
+    authorId: "cory-house",
+    length: "2:52",
+    category: "Software Architecture"
+  },
+  {
+    id: "career-reboot-for-developer-mind",
+    title: "Becoming an Outlier: Reprogramming the Developer Mind",
+    watchHref: "http://www.pluralsight.com/courses/career-reboot-for-developer-mind",
+    authorId: "cory-house",
+    length: "2:30",
+    category: "Career"
+  },
+  {
+    id: "web-components-shadow-dom",
+    title: "Web Component Fundamentals",
+    watchHref: "http://www.pluralsight.com/courses/web-components-shadow-dom",
+    authorId: "cory-house",
+    length: "5:10",
+    category: "HTML5"
+  }
 ];
 
+var authors = [
+  {
+    id: 'cory-house',
+    firstName: 'Cory',
+    lastName: 'House'
+  },
+  {
+    id: 'scott-allen',
+    firstName: 'Scott',
+    lastName: 'Allen'
+  },
+  {
+    id: 'dan-wahlin',
+    firstName: 'Dan',
+    lastName: 'Wahlin'
+  }
+];
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
+const generateId = (courseTitle) => {
+  return replaceAll(courseTitle, ' ', '-');
+};
+
+app.get('/api/authors', function (req, res) {
+  setTimeout(function () {
+    res.json(authors);
+  }, 1000);
+  //res.json(authors);
+});
+
 app.get('/api/courses', function (req, res) {
-  res.json(courses);
+  setTimeout(function () {
+    res.json(courses);
+  }, 1000);
+  //res.json(courses);
 });
 
 app.post('/api/courses', function (req, res) {
-    var new_id = 0;
-    for(var i = 0; i < courses.length; i++){
-        if(new_id < courses[i].id){
-            new_id = courses[i].id;
-        }
-    }
     
-    var course = {
-        id: new_id + 1,
-        title: req.body.title,
-        description: req.body.description,
-        author: req.body.author
-    };
+    var course = req.body;
+    
+    course.id = generateId(course.title);
     
     courses.push(course);
     
-    res.json(course);
+    setTimeout(function(){
+      res.json(course);
+    }, 1000);
+    //res.json(course);
 });
 
 app.get('/api/courses/:id', function (req, res) {
-    var course_id;
     for(var i = 0; i < courses.length; i++){
         if(req.params.id == courses[i].id){
             res.json(courses[i]);
@@ -121,5 +152,5 @@ app.delete('/api/courses/:id', function (req, res) {
 });
 
 app.listen(3000, function () {
-  console.log('express app listening on port 3000!');
+  console.log(`express app listening on port 3000! in ${process.env.NODE_ENV} mode`);
 });

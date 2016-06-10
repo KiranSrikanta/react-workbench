@@ -1,18 +1,8 @@
-import {createStore} from 'redux';
-//import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import {rootReducer} from '../reducers/index';
-
-/**
- * Creates the redux store.
- * @param {initialState} initialState the initial state for the redux store.
- * @returns {store} The redux store.
- */
-export default function configureStore (initialState) {
-    const store = createStore(
-        rootReducer,
-        initialState,
-        window.devToolsExtension()
-    );
-    
-    return store;
+//eslint-disable-next-line no-process-env
+if (process.env.NODE_ENV === 'production') {
+  //eslint-disable-next-line global-require
+  module.exports = require('./configure-store.prod.js');
+} else {
+  //eslint-disable-next-line global-require
+  module.exports = require('./configure-store.dev.js');
 }

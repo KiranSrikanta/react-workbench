@@ -166,10 +166,6 @@ module.exports = {
         "no-warning-comments": "error",
         "no-whitespace-before-property": "error",
         "no-with": "error",
-        "object-curly-spacing": [
-            "error",
-            "never"
-        ],
         "object-property-newline": "error",
         "object-shorthand": "error",
         "one-var": "error",
@@ -196,7 +192,6 @@ module.exports = {
         "sort-imports": "error",
         "sort-vars": "error",
         "space-before-blocks": "error",
-        "space-before-function-paren": "error",
         "space-in-parens": [
             "error",
             "never"
